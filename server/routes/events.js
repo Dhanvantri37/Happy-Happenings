@@ -1,0 +1,10 @@
+const router = require('express').Router();
+const c = require('../controllers/eventController');
+const { protect, adminOnly } = require('../middleware/auth');
+router.get('/',            c.getEvents);
+router.get('/:id',         c.getEvent);
+router.post('/',           protect, adminOnly, c.createEvent);
+router.put('/:id',         protect, adminOnly, c.updateEvent);
+router.delete('/:id',      protect, adminOnly, c.deleteEvent);
+router.post('/:id/reviews', protect, c.addReview);
+module.exports = router;
